@@ -20,6 +20,7 @@ public class PostResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private List<ReplyResponseDto> replyList = new ArrayList<>();
+    private Long likeCount;
 
     public PostResponseDto(Post post) {
         this.id = post.getId();
@@ -28,10 +29,12 @@ public class PostResponseDto {
         this.contents = post.getContents();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
+        this.likeCount = 0L;
     }
 
-    public PostResponseDto(Post post, List<ReplyResponseDto> replyList) {
+    public PostResponseDto(Post post, List<ReplyResponseDto> replyList, Long likeCount) {
         this(post);
         this.replyList = replyList;
+        this.likeCount = likeCount;
     }
 }

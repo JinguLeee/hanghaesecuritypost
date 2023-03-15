@@ -5,13 +5,11 @@ import com.example.hanghaerolepost.dto.PostResponseDto;
 import com.example.hanghaerolepost.security.UserDetailsImpl;
 import com.example.hanghaerolepost.service.PostService;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.Swagger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -48,5 +46,11 @@ public class PostController {
     @DeleteMapping("/{postId}")
     public ResponseEntity<String> deletePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return postService.delete(postId, userDetails.getUser());
+    }
+
+    @ApiOperation(value = "게시글 좋아요", notes = "게시글 좋아요를 등록, 취소한다.")
+    @PostMapping("like/{postId}")
+    public ResponseEntity<String> likePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return postService.likePost(postId, userDetails.getUser());
     }
 }

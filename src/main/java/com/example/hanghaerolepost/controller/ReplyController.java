@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/reply")
@@ -34,5 +32,11 @@ public class ReplyController {
     @DeleteMapping("/{replyId}")
     public ResponseEntity<String> deleteReply(@PathVariable Long replyId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return replyService.delete(replyId, userDetails.getUser());
+    }
+
+    @ApiOperation(value = "댓글 좋아요", notes = "댓글 좋아요를 등록, 취소한다.")
+    @PostMapping("like/{replyId}")
+    public ResponseEntity<String> likeReply(@PathVariable Long replyId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return replyService.likeReply(replyId, userDetails.getUser());
     }
 }

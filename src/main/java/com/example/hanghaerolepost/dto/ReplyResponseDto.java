@@ -15,17 +15,15 @@ public class ReplyResponseDto {
     private LocalDateTime modifiedAt;
     private String username;
 
-    public ReplyResponseDto(Reply reply) {
+    private Long likeCount;
+
+    public ReplyResponseDto(Reply reply, String username, Long likeCount) {
         this.id = reply.getId();
         this.reply = reply.getReply();
         this.createdAt = reply.getCreatedAt();
         this.modifiedAt = reply.getModifiedAt();
-        this.username = reply.getUser().getUsername();
-    }
-
-    public ReplyResponseDto(Reply reply, String username) {
-        this(reply);
         this.username = username;
+        this.likeCount = likeCount;
     }
 
 }
